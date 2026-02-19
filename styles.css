@@ -1,0 +1,385 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.screen {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1, h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn {
+    padding: 20px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    min-height: 56px; /* Minimum touch target size */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.btn-primary {
+    background: white;
+    color: #667eea;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    background: #f5f5f5;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+    transform: scale(0.98);
+}
+
+.btn-back {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.btn-back:hover,
+.btn-back:active {
+    background: rgba(255,255,255,0.25);
+}
+
+.btn-back:active {
+    transform: scale(0.98);
+}
+
+.btn-control {
+    background: white;
+    color: #667eea;
+    flex: 1;
+    padding: 18px 20px;
+    min-height: 56px;
+    font-size: 1.1em;
+}
+
+.btn-control:hover,
+.btn-control:active {
+    transform: translateY(-1px);
+    background: #f5f5f5;
+}
+
+.btn-control:active {
+    transform: scale(0.97);
+}
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.category-item {
+    background: white;
+    padding: 24px 20px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 1.2em;
+    font-weight: 500;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.category-item:hover,
+.category-item:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background: #f9f9f9;
+}
+
+.category-item:active {
+    transform: scale(0.98);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.message.success {
+    background: #4caf50;
+    color: white;
+}
+
+.message.error {
+    background: #f44336;
+    color: white;
+}
+
+/* Flashcard Styles */
+.flashcard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: white;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.card-counter {
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.flashcard {
+    width: 100%;
+    max-width: 400px;
+    height: 350px;
+    perspective: 1000px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.flashcard .card-front,
+.flashcard .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    transition: transform 0.6s;
+}
+
+.flashcard .card-front {
+    background: white;
+    transform: rotateY(0deg);
+}
+
+.flashcard .card-back {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.flashcard.flipped .card-front {
+    transform: rotateY(-180deg);
+}
+
+.flashcard.flipped .card-back {
+    transform: rotateY(0deg);
+}
+
+.card-label {
+    font-size: 0.9em;
+    opacity: 0.7;
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-content {
+    font-size: 2em;
+    font-weight: 700;
+    text-align: center;
+    word-wrap: break-word;
+    line-height: 1.3;
+}
+
+.card-controls {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 8px;
+}
+
+/* Responsive Design - Mobile First */
+@media (max-width: 480px) {
+    body {
+        padding: 16px;
+    }
+    
+    h1 {
+        font-size: 2em;
+        margin-bottom: 32px;
+    }
+    
+    h2 {
+        font-size: 1.6em;
+        margin-bottom: 24px;
+    }
+    
+    .btn {
+        padding: 22px 30px;
+        font-size: 1.15em;
+        min-height: 60px;
+    }
+    
+    .category-item {
+        padding: 26px 20px;
+        font-size: 1.15em;
+        min-height: 64px;
+    }
+    
+    .flashcard {
+        height: 320px;
+        max-width: 100%;
+    }
+    
+    .card-content {
+        font-size: 1.6em;
+    }
+    
+    .card-controls {
+        gap: 12px;
+    }
+    
+    .btn-control {
+        padding: 20px 16px;
+        font-size: 1em;
+        min-height: 60px;
+    }
+    
+    .btn-back {
+        margin-top: 24px;
+        padding: 22px 30px;
+        min-height: 60px;
+    }
+}
+
+/* Prevent text selection on buttons */
+button, .category-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
