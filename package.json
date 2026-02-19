@@ -2,13 +2,16 @@
   "name": "flashcards-app",
   "version": "1.0.0",
   "description": "Spanish vocabulary flashcards app",
+  "homepage": "https://MayoG.github.io/VocabulatyFlashCards",
   "scripts": {
-    "start": "npx http-server public -p 3000 -o"
+    "start": "npx http-server public -p 3000 -o",
+    "deploy": "gh-pages -d public"
   },
   "keywords": ["flashcards", "spanish", "vocabulary"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "gh-pages": "^6.1.0"
   }
 }
