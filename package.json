@@ -1,0 +1,14 @@
+{
+  "name": "flashcards-app",
+  "version": "1.0.0",
+  "description": "Spanish vocabulary flashcards app",
+  "scripts": {
+    "start": "npx http-server public -p 3000 -o"
+  },
+  "keywords": ["flashcards", "spanish", "vocabulary"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

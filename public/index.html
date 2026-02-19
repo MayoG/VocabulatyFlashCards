@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Vocabulary Flashcards</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Menu -->
+        <div id="mainMenu" class="screen active">
+            <h1>🇪🇸 Spanish Flashcards</h1>
+            <div class="menu-buttons">
+                <button class="btn btn-primary" onclick="showScreen('studyMenu')">Study</button>
+            </div>
+        </div>
+
+        <!-- Study Menu -->
+        <div id="studyMenu" class="screen">
+            <h2>Select Category to Study</h2>
+            <div id="categoryList" class="category-list">
+                <div style="color: white; text-align: center; padding: 20px;">Loading categories...</div>
+            </div>
+            <button class="btn btn-back" onclick="showScreen('mainMenu')">Back</button>
+        </div>
+
+        <!-- Flashcard View -->
+        <div id="flashcardView" class="screen">
+            <div class="flashcard-container">
+                <div class="progress-bar">
+                    <div id="progress" class="progress-fill"></div>
+                </div>
+                <div class="card-counter">
+                    <span id="cardNumber">1</span> / <span id="totalCards">0</span>
+                </div>
+                <div class="flashcard" id="flashcard" onclick="flipCard()">
+                    <div class="card-front">
+                        <div class="card-label">Spanish</div>
+                        <div class="card-content" id="cardFront">Loading...</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-label">English</div>
+                        <div class="card-content" id="cardBack">Loading...</div>
+                    </div>
+                </div>
+                <div class="card-controls">
+                    <button class="btn btn-control" onclick="previousCard()">← Previous</button>
+                    <button class="btn btn-control" onclick="nextCard()">Next →</button>
+                </div>
+                <button class="btn btn-back" onclick="showScreen('studyMenu')">Back to Categories</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
