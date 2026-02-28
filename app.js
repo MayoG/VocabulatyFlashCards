@@ -11,6 +11,13 @@ let randomOrder = [];
 let touchStartX = 0;
 let touchEndX = 0;
 
+// Register service worker for offline support (loads with previous data when no signal)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+
 // Initialize app
 document.addEventListener("DOMContentLoaded", () => {
   loadCategories();
