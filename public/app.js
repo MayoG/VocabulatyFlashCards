@@ -21,7 +21,32 @@ if ("serviceWorker" in navigator) {
 // Initialize app
 document.addEventListener("DOMContentLoaded", () => {
   loadCategories();
+  setupKeyboardNavigation();
 });
+
+// Keyboard: Left/Right = prev/next card, Up = flip card
+function setupKeyboardNavigation() {
+  document.addEventListener("keydown", (e) => {
+    const flashcardView = document.getElementById("flashcardView");
+    if (!flashcardView || !flashcardView.classList.contains("active")) return;
+
+    switch (e.key) {
+      case "ArrowRight":
+        e.preventDefault();
+        nextCard();
+        break;
+      case "ArrowLeft":
+        e.preventDefault();
+        previousCard();
+        break;
+      case "ArrowUp":
+      case "ArrowDown":
+        e.preventDefault();
+        flipCard();
+        break;
+    }
+  });
+}
 
 // Setup swipe gestures for mobile
 function setupSwipeGestures() {
