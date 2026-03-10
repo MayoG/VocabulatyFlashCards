@@ -99,6 +99,12 @@ function showScreen(screenId) {
   }
 }
 
+// Simple HTML escaping to safely inject CSV values into innerHTML
+function escapeHTML(str) {
+  if (!str) return "";
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
 // Parse CSV text to array of objects
 function parseCSV(csvText) {
   const lines = csvText.trim().split("\n");
@@ -311,23 +317,129 @@ function updateCard(skipAnimation = false) {
   const wordIndex = randomOrder[currentCardIndex];
   const word = currentWords[wordIndex];
 
-  // Randomly decide whether to show Spanish or English first
-  const showSpanishFirst = Math.random() > 0.5;
-
   // Handle different CSV column names (spanish/english or Spanish/English)
   const spanish = word.spanish || word.Spanish || "";
   const english = word.english || word.English || "";
+  const frontContentEl = document.getElementById("cardFront");
+  const backContentEl = document.getElementById("cardBack");
+  const frontLabelEl = document.querySelector(".card-front .card-label");
+  const backLabelEl = document.querySelector(".card-back .card-label");
 
-  if (showSpanishFirst) {
-    document.getElementById("cardFront").textContent = spanish;
-    document.getElementById("cardBack").textContent = english;
-    document.querySelector(".card-front .card-label").textContent = "Spanish";
-    document.querySelector(".card-back .card-label").textContent = "English";
+  // Detect if this word represents a verb conjugation card
+  const hasConjugationColumns = word.yo || word.tu || word.el || word.nosotros || word.vosotros || word.ellos;
+  const isConjugationCategory = currentCategory === "verbs-conjugations" || currentCategory === "iregullar-verbs-conjugations";
+  const isConjugationWord = isConjugationCategory || hasConjugationColumns;
+
+  // Helper to build the Spanish conjugation table HTML
+  function buildConjugationTable() {
+    const yo = word.yo || "";
+    const tu = word.tu || "";
+    const el = word.el || "";
+    const nosotros = word.nosotros || "";
+    const vosotros = word.vosotros || "";
+    const ellos = word.ellos || "";
+
+    // If no conjugations are present, fall back to plain Spanish text
+    if (!yo && !tu && !el && !nosotros && !vosotros && !ellos) {
+      return `<div class="conjugation-fallback">${escapeHTML(spanish)}</div>`;
+    }
+
+    const cell = (pronounsLabel, value) => {
+      const valueHtml = value ? `<span class="conjugation-form">${escapeHTML(value)}</span>` : "<br>—";
+      return `<td><span class="conjugation-pronouns">${pronounsLabel}</span>${valueHtml}</td>`;
+    };
+
+    return `
+      <table class="conjugation-table" aria-label="Spanish conjugations">
+        <thead>
+          <tr>
+            <th>Single</th>
+            <th>Plural</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            ${cell("yo", yo)}
+            ${cell("nosotros", nosotros)}
+          </tr>
+          <tr>
+            ${cell("tú", tu)}
+            ${cell("vosotros", vosotros)}
+          </tr>
+          <tr>
+            ${cell("él / ella / usted", el)}
+            ${cell("ellos / ellas / ustedes", ellos)}
+          </tr>
+        </tbody>
+      </table>
+    `;
+  }
+
+  // Clear any previous HTML to avoid mixing text and tables
+  frontContentEl.textContent = "";
+  backContentEl.textContent = "";
+  frontContentEl.classList.remove("has-conjugation-table");
+  backContentEl.classList.remove("has-conjugation-table");
+
+  if (isConjugationWord) {
+    // Helper to build an English-side layout: English word + pronoun-only table
+    function buildEnglishConjugationLayout() {
+      const heading = escapeHTML(english || spanish);
+      const pronounCell = (label) =>
+        `<td><span class="conjugation-pronouns">${label}</span></td>`;
+
+      return `
+        <div class="conjugation-english-wrapper">
+          <div class="conjugation-english-heading">${heading}</div>
+          <table class="conjugation-table" aria-label="Subject pronouns">
+            <thead>
+              <tr>
+                <th>Single</th>
+                <th>Plural</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                ${pronounCell("yo")}
+                ${pronounCell("nosotros")}
+              </tr>
+              <tr>
+                ${pronounCell("tú")}
+                ${pronounCell("vosotros")}
+              </tr>
+              <tr>
+                ${pronounCell("él / ella / usted")}
+                ${pronounCell("ellos / ellas / ustedes")}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // Verb conjugation cards: English (with pronoun table) on front, Spanish conjugation table on back
+    frontLabelEl.textContent = "English";
+    backLabelEl.textContent = "Spanish";
+
+    frontContentEl.innerHTML = buildEnglishConjugationLayout();
+    backContentEl.innerHTML = buildConjugationTable();
+    frontContentEl.classList.add("has-conjugation-table");
+    backContentEl.classList.add("has-conjugation-table");
   } else {
-    document.getElementById("cardFront").textContent = english;
-    document.getElementById("cardBack").textContent = spanish;
-    document.querySelector(".card-front .card-label").textContent = "English";
-    document.querySelector(".card-back .card-label").textContent = "Spanish";
+    // Non-conjugation cards: keep existing random side behavior
+    const showSpanishFirst = Math.random() > 0.5;
+
+    if (showSpanishFirst) {
+      frontContentEl.textContent = spanish;
+      backContentEl.textContent = english;
+      frontLabelEl.textContent = "Spanish";
+      backLabelEl.textContent = "English";
+    } else {
+      frontContentEl.textContent = english;
+      backContentEl.textContent = spanish;
+      frontLabelEl.textContent = "English";
+      backLabelEl.textContent = "Spanish";
+    }
   }
 
   // Reset flip state (if not already reset above)
