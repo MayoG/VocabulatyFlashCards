@@ -302,8 +302,14 @@ h2 {
   font-size: 0.9em;
   opacity: 0.7;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+/* Make the Spanish-side label on the back fully white (not gray) */
+.flashcard .card-back .card-label {
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .card-content {
@@ -359,6 +365,15 @@ h2 {
 .flashcard .card-back .conjugation-form {
   color: #ffffff;
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Infinitive shown in the Spanish label on conjugation cards */
+.flashcard .card-back .card-label .conjugation-form.conjugation-infinitive {
+  display: inline;
+  margin-top: 0;
+  margin-left: 6px;
+  font-size: 1em;
+  opacity: 1;
 }
 
 .card-content.has-conjugation-table {

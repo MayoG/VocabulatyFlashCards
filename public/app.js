@@ -385,8 +385,7 @@ function updateCard(skipAnimation = false) {
     // Helper to build an English-side layout: English word + pronoun-only table
     function buildEnglishConjugationLayout() {
       const heading = escapeHTML(english || spanish);
-      const pronounCell = (label) =>
-        `<td><span class="conjugation-pronouns">${label}</span></td>`;
+      const pronounCell = (label) => `<td><span class="conjugation-pronouns">${label}</span></td>`;
 
       return `
         <div class="conjugation-english-wrapper">
@@ -419,7 +418,13 @@ function updateCard(skipAnimation = false) {
 
     // Verb conjugation cards: English (with pronoun table) on front, Spanish conjugation table on back
     frontLabelEl.textContent = "English";
-    backLabelEl.textContent = "Spanish";
+    // Show the Spanish infinitive alongside the Spanish title on the back of the card,
+    // styled like the conjugation forms
+    if (spanish) {
+      backLabelEl.innerHTML = `Spanish –<span class="conjugation-form conjugation-infinitive">${escapeHTML(spanish)}</span>`;
+    } else {
+      backLabelEl.textContent = "Spanish";
+    }
 
     frontContentEl.innerHTML = buildEnglishConjugationLayout();
     backContentEl.innerHTML = buildConjugationTable();
