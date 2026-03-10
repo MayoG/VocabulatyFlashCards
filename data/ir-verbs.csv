@@ -1,19 +1,19 @@
-Spanish,English
-abrir,to open
-descubrir,to discover
-permitir,to permit
-admitir,to admit
-discutir,to discuss
-recibir,to receive
-asistir a,to attend
-escribir,to write
-subir,to climb / go up
-cubrir,to cover
-existir,to exist
-sufrir,to suffer
-decidir,to decide
-omitir,to omit
-unir,to unite
-describir,to describe
-partir,to divide
-vivir,to live
+Spanish,English,yo,tu,el,nosotros,vosotros,ellos
+abrir,to open,abro,abres,abre,abrimos,abrís,abren
+descubrir,to discover,descubro,descubres,descubre,descubrimos,descubrís,descubren
+permitir,to permit,permito,permites,permite,permitimos,permitís,permiten
+admitir,to admit,admito,admites,admite,admitimos,admitís,admiten
+discutir,to discuss,discuto,discutes,discute,discutimos,discutís,discuten
+recibir,to receive,recibo,recibes,recibe,recibimos,recibís,reciben
+asistir a,to attend,asisto,asistes,asiste,asistimos,asistís,asisten
+escribir,to write,escribo,escribes,escribe,escribimos,escribís,escriben
+subir,to climb / go up,subo,subes,sube,subimos,subís,suben
+cubrir,to cover,cubro,cubres,cubre,cubrimos,cubrís,cubren
+existir,to exist,existo,existes,existe,existimos,existís,existen
+sufrir,to suffer,sufro,sufres,sufre,sufrimos,sufrís,sufren
+decidir,to decide,decido,decides,decide,decidimos,decidís,deciden
+omitir,to omit,omito,omites,omite,omitimos,omitís,omiten
+unir,to unite,uno,unes,une,unimos,unís,unen
+describir,to describe,describo,describes,describe,describimos,describís,describen
+partir,to divide,parto,partes,parte,partimos,partís,parten
+vivir,to live,vivo,vives,vive,vivimos,vivís,viven

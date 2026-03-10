@@ -1,42 +1,42 @@
-Spanish,English
-alquilar,to rent
-entrar (en),to enter (into)
-necesitar,to need
-amar,to love
-enviar,to send
-olvidar,to forget
-andar,to walk
-escuchar,to listen to
-pagar,to pay for
-ayudar,to help
-esperar,to hope / wait for
-practicar,to practice
-bailar,to dance
-estudiar,to study
-preguntar,to ask
-buscar,to look for
-firmar,to sign
-preparar,to prepare
-caminar,to walk
-ganar,to win / earn
-regresar,to return
-cantar,to sing
-gastar,to spend money
-saludar,to greet
-cocinar,to cook
-hablar,to speak / talk
-tocar,to touch / play an instrument
-comprar,to buy
-lavar,to wash
-tomar,to take / drink
-contestar,to answer
-llegar,to arrive
-trabajar,to work
-dejar,to allow / leave
-llevar,to wear / carry
-viajar,to travel
-desear,to desire / wish
-mandar,to order
-visitar,to visit
-enseñar,to teach
-mirar,to watch / look at
+Spanish,English,yo,tu,el,nosotros,vosotros,ellos
+alquilar,to rent,alquilo,alquilas,alquila,alquilamos,alquiláis,alquilan
+entrar (en),to enter (into),entro,entras,entra,entramos,entráis,entran
+necesitar,to need,necesito,necesitas,necesita,necesitamos,necesitáis,necesitan
+amar,to love,amo,amas,ama,amamos,amáis,aman
+enviar,to send,envío,envías,envía,enviamos,enviáis,envían
+olvidar,to forget,olvido,olvidas,olvida,olvidamos,olvidáis,olvidan
+andar,to walk,ando,andas,anda,andamos,andáis,andan
+escuchar,to listen to,escucho,escuchas,escucha,escuchamos,escucháis,escuchan
+pagar,to pay for,pago,pagas,paga,pagamos,pagáis,pagan
+ayudar,to help,ayudo,ayudas,ayuda,ayudamos,ayudáis,ayudan
+esperar,to hope / wait for,espero,esperas,espera,esperamos,esperáis,esperan
+practicar,to practice,practico,practicas,practica,practicamos,practicáis,practican
+bailar,to dance,bailo,bailas,baila,bailamos,bailáis,bailan
+estudiar,to study,estudio,estudias,estudia,estudiamos,estudiáis,estudian
+preguntar,to ask,pregunto,preguntas,pregunta,preguntamos,preguntáis,preguntan
+buscar,to look for,busco,buscas,busca,buscamos,buscáis,buscan
+firmar,to sign,firmo,firmas,firma,firmamos,firmáis,firman
+preparar,to prepare,preparo,preparas,prepara,preparamos,preparáis,preparan
+caminar,to walk,camino,caminas,camina,caminamos,camináis,caminan
+ganar,to win / earn,ganó,ganas,gana,ganamos,ganáis,ganan
+regresar,to return,regreso,regresas,regresa,regresamos,regresáis,regresan
+cantar,to sing,canto,cantas,canta,cantamos,cantáis,cantan
+gastar,to spend money,gasto,gastas,gasta,gastamos,gastáis,gastan
+saludar,to greet,saludo,saludas,saluda,saludamos,saludáis,saludan
+cocinar,to cook,cocino,cocinas,cocina,cocinamos,cocináis,cocinan
+hablar,to speak / talk,hablo,hablas,habla,hablamos,habláis,hablan
+tocar,to touch / play an instrument,toco,tocas,toca,tocamos,tocáis,tocan
+comprar,to buy,compro,compras,compra,compramos,compráis,compran
+lavar,to wash,lavo,lavas,lava,lavamos,laváis,lavan
+tomar,to take / drink,tomo,tomas,toma,tomamos,tomáis,toman
+contestar,to answer,contesto,contestas,contesta,contestamos,contestáis,contestan
+llegar,to arrive,llego,llegas,llega,llegamos,llegáis,llegan
+trabajar,to work,trabajo,trabajas,trabaja,trabajamos,trabajáis,trabajan
+dejar,to allow / leave,dejo,dejas,deja,dejanos,dejaís,dejan
+llevar,to wear / carry,llevo,llevas,lleva,llevamos,lleváis,llevan
+viajar,to travel,viajo,viajas,viaja,viajamos,viajáis,viajan
+desear,to desire / wish,deseo,deseas,desea,deseamos,deseáis,desean
+mandar,to order,mando,mandas,manda,mandamos,mandáis,mandan
+visitar,to visit,visito,visitas,visita,visitamos,visitáis,visitan
+enseñar,to teach,enseño,enseñas,enseña,enseñamos,enseñáis,enseñan
+mirar,to watch / look at,miro,miras,mira,miramos,miráis,miran
