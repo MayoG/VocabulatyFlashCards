@@ -24,6 +24,58 @@ document.addEventListener("DOMContentLoaded", () => {
   setupKeyboardNavigation();
 });
 
+async function fetchWithTimeout(url, timeoutMs = 2500) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    return res;
+  } catch (e) {
+    clearTimeout(timeoutId);
+    throw e;
+  }
+}
+
+async function fetchFromCache(url) {
+  try {
+    if (!("caches" in window)) return null;
+    const cached = await caches.match(url);
+    return cached || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+async function fetchTextPreferCacheOnSlow(url, timeoutMs = 2500) {
+  try {
+    const res = await fetchWithTimeout(url, timeoutMs);
+    if (res && res.ok) return await res.text();
+    // If server returns an error, try cache before failing.
+    const cached = await fetchFromCache(url);
+    if (cached) return await cached.text();
+    throw new Error(`Failed to fetch ${url}`);
+  } catch (e) {
+    const cached = await fetchFromCache(url);
+    if (cached) return await cached.text();
+    throw e;
+  }
+}
+
+async function fetchJsonPreferCacheOnSlow(url, timeoutMs = 2500) {
+  try {
+    const res = await fetchWithTimeout(url, timeoutMs);
+    if (res && res.ok) return await res.json();
+    const cached = await fetchFromCache(url);
+    if (cached) return await cached.json();
+    throw new Error(`Failed to fetch ${url}`);
+  } catch (e) {
+    const cached = await fetchFromCache(url);
+    if (cached) return await cached.json();
+    throw e;
+  }
+}
+
 // Keyboard: Left/Right = prev/next card, Up = flip card
 function setupKeyboardNavigation() {
   document.addEventListener("keydown", (e) => {
@@ -164,11 +216,8 @@ async function loadCategories() {
 async function getCategoryNames() {
   // Option 1: Try to read a categories.json file
   try {
-    const response = await fetch(`${DATA_DIR}/categories.json`);
-    if (response.ok) {
-      const data = await response.json();
-      return data.categories || [];
-    }
+    const data = await fetchJsonPreferCacheOnSlow(`${DATA_DIR}/categories.json`, 2000);
+    return data.categories || [];
   } catch (e) {
     // If no categories.json, we'll scan for CSV files
     // Since we can't list directory in browser, we'll use a predefined list
@@ -180,14 +229,19 @@ async function getCategoryNames() {
   const foundCategories = [];
 
   for (const cat of commonCategories) {
-    try {
-      const response = await fetch(`${DATA_DIR}/${cat}.csv`);
-      if (response.ok) {
-        foundCategories.push(cat);
-      }
-    } catch (e) {
-      // Category doesn't exist
+    const url = `${DATA_DIR}/${cat}.csv`;
+
+    // Prefer quick cache detection to avoid long waits on poor connections
+    const cached = await fetchFromCache(url);
+    if (cached) {
+      foundCategories.push(cat);
+      continue;
     }
+
+    try {
+      const response = await fetchWithTimeout(url, 800);
+      if (response.ok) foundCategories.push(cat);
+    } catch (e) {}
   }
 
   return foundCategories;
@@ -231,12 +285,9 @@ async function startStudyAll() {
     // Load words from all categories
     for (const category of categories) {
       try {
-        const response = await fetch(`${DATA_DIR}/${category}.csv`);
-        if (response.ok) {
-          const csvText = await response.text();
-          const words = parseCSV(csvText);
-          currentWords = currentWords.concat(words);
-        }
+        const csvText = await fetchTextPreferCacheOnSlow(`${DATA_DIR}/${category}.csv`, 2500);
+        const words = parseCSV(csvText);
+        currentWords = currentWords.concat(words);
       } catch (error) {
         console.warn(`Failed to load category ${category}:`, error);
       }
@@ -265,13 +316,7 @@ async function startStudyAll() {
 async function startStudy(category) {
   try {
     currentCategory = category;
-    const response = await fetch(`${DATA_DIR}/${category}.csv`);
-
-    if (!response.ok) {
-      throw new Error(`Failed to load category: ${response.statusText}`);
-    }
-
-    const csvText = await response.text();
+    const csvText = await fetchTextPreferCacheOnSlow(`${DATA_DIR}/${category}.csv`, 2500);
     currentWords = parseCSV(csvText);
 
     if (currentWords.length === 0) {
